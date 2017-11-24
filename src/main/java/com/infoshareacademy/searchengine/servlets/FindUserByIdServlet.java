@@ -1,7 +1,5 @@
 package com.infoshareacademy.searchengine.servlets;
 import com.infoshareacademy.searchengine.dao.UsersRepositoryDao;
-import com.infoshareacademy.searchengine.dao.UsersRepositoryDaoBean;
-import com.infoshareacademy.searchengine.repository.UsersRepository;
 import com.infoshareacademy.searchengine.domain.User;
 
 import javax.ejb.EJB;
@@ -21,12 +19,12 @@ public class FindUserByIdServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //UsersRepositoryDao users = new UsersRepositoryDaoBean();
+
         PrintWriter writer = resp.getWriter();
         String id = req.getParameter("id");
         if(id == null) {
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            writer.println("<!DOCTYPE html><html><body>No ID provided</body></html>");
+            writer.println("<!DOCTYPE html><html><body><h1>No ID provided</h1></body></html>");
             return;
         } else {
             User user = users.getUserById(Integer.parseInt(id));
@@ -34,7 +32,7 @@ public class FindUserByIdServlet extends HttpServlet {
         User user = users.getUserById(Integer.parseInt(id));
         if (user == null){
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            writer.println("<!DOCTYPE html><html><body>User not found</body></html>");
+            writer.println("<!DOCTYPE html><html><h1><body>User not found</h1></body></html>");
             return;
         } else {
             writer.println("<!DOCTYPE html><html><body>" + user.getName() + " " + user.getSurname() + "</body></html>");
