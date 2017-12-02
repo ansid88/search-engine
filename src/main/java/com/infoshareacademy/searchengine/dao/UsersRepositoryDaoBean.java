@@ -4,10 +4,11 @@ import com.infoshareacademy.searchengine.domain.User;
 import com.infoshareacademy.searchengine.repository.UsersRepository;
 
 import javax.ejb.Stateless;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
-public class UsersRepositoryDaoBean implements UsersRepositoryDao {
+public class UsersRepositoryDaoBean implements UsersRepositoryDao, UsersRepositoryDaoRemote {
     @Override
     public void addUser(User user) {
         UsersRepository.getRepository().add(user);
@@ -38,5 +39,15 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
     @Override
     public List<User> getUsersList() {
         return UsersRepository.getRepository();
+    }
+
+    @Override
+    public List<String> getUsersNames() {
+        List<User> userList = UsersRepository.getRepository();
+        List<String> names = new ArrayList<>();
+        for(User user : userList) {
+            names.add(user.getName());
+        }
+        return names;
     }
 }

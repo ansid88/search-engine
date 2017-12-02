@@ -1,8 +1,10 @@
 package com.infoshareacademy.searchengine.servlets;
+import com.infoshareacademy.searchengine.cdibeans.MaxPulse;
 import com.infoshareacademy.searchengine.dao.UsersRepositoryDao;
 import com.infoshareacademy.searchengine.domain.User;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +18,9 @@ public class FindUserByIdServlet extends HttpServlet {
 
     @EJB
     UsersRepositoryDao users;
+
+    @Inject
+    MaxPulse pulse;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -35,7 +40,8 @@ public class FindUserByIdServlet extends HttpServlet {
             writer.println("<!DOCTYPE html><html><h1><body>User not found</h1></body></html>");
             return;
         } else {
-            writer.println("<!DOCTYPE html><html><body>" + user.getName() + " " + user.getSurname() + "</body></html>");
+            writer.println("<!DOCTYPE html><html><body>" + user.getName() + " " + user.getSurname() +
+                    " " + pulse.calculatePulse(user.getAge(), user.getGender()) + "</body></html>");
         }
     }
 }
