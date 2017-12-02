@@ -1,5 +1,8 @@
 package com.infoshareacademy.searchengine.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     private int id;
     private String name;
@@ -7,6 +10,7 @@ public class User {
     private String login;
     private int age;
     private Gender gender;
+    private List<Group> groups = new ArrayList<>();
 
 
     public int getId() {
