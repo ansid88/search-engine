@@ -68,11 +68,11 @@ public class AddUserServlet extends HttpServlet {
             user.setSurname(surname);
             user.setAge(Integer.parseInt(age));
             user.setLogin(login);
-            if(gender.equals("Man")) {
-                user.setGender(Gender.MAN);
-            } else if(gender.equals("Woman")) {
-                user.setGender(Gender.WOMAN);
-            }
+//            if(gender.equals("Man")) {
+//                user.setGender(Gender.MAN);
+//            } else if(gender.equals("Woman")) {
+//                user.setGender(Gender.WOMAN);
+//            }
 
 
             users.addUser(user);
